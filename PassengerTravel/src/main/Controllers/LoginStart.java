@@ -19,7 +19,7 @@ public class LoginStart extends Application {
          launch(args);
     }
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start (Stage primaryStage) throws Exception {
 
         PropertyConfigurator.configure(getClass().getResource(Constants.Configurations.LOG4J_PROPERTIES));
         URL path = getClass().getResource(Constants.View.Login);
@@ -28,6 +28,7 @@ public class LoginStart extends Application {
         {
             Parent root = FXMLLoader.load(path);
             Scene scene = new Scene(root);
+            primaryStage.setTitle("Passenger Travel");
             primaryStage.setScene(scene);
             primaryStage.show();
         }

@@ -58,7 +58,7 @@
                         <Font name="Buxton Sketch" size="23.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to left bottom, #ffffff,#32317E); -fx-border-width: 0px 0px 5px 0px;" text="References" textFill="WHITE">
+                  <Button fx:id="references" mnemonicParsing="false" onAction="#openRef" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to left bottom, #ffffff,#32317E); -fx-border-width: 0px 0px 5px 0px;" text="References" textFill="WHITE">
                      <font>
                         <Font name="Buxton Sketch" size="23.0" />
                      </font>
