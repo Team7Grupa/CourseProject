@@ -34,17 +34,17 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to left bottom, #ffffff,#32317E); -fx-border-width: 0px 0px 5px 0px;" text="Create Cashier" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#createCashier" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to left bottom, #ffffff,#32317E); -fx-border-width: 0px 0px 5px 0px;" text="Create Cashier" textFill="WHITE">
                      <font>
                         <Font name="Buxton Sketch" size="23.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to left bottom, #ffffff,#32317E); -fx-border-width: 0px 0px 5px 0px;" text="Profiles and Rating" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#ProfilesAndRating" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to left bottom, #ffffff,#32317E); -fx-border-width: 0px 0px 5px 0px;" text="Profiles and Rating" textFill="WHITE">
                      <font>
                         <Font name="Buxton Sketch" size="23.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to left bottom, #ffffff,#32317E); -fx-border-width: 0px 0px 5px 0px;" text="Work with Travel" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#workWithTravel" prefHeight="56.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: linear-gradient(to left bottom, #ffffff,#32317E); -fx-border-width: 0px 0px 5px 0px;" text="Work with Travel" textFill="WHITE">
                      <font>
                         <Font name="Buxton Sketch" size="23.0" />
                      </font>
