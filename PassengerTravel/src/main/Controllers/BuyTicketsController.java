@@ -1,5 +1,6 @@
 package Controllers;
 
+import DataClasses.DatabaseClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,19 +26,20 @@ public class BuyTicketsController {
     private TextField price;
     @FXML
     private Pane ticketPane;
-
+    @FXML
+    private TextField username;
     @FXML
     void goBack(ActionEvent event) throws IOException {
 
        Pane newLoadedPane = FXMLLoader.load(getClass().getResource("/workWithTravel.fxml"));
        ticketPane.getChildren().add(newLoadedPane);
-
     }
 
     @FXML
     void saveTicket(ActionEvent event) throws SQLException {
         ObservableList<String> list = comboBoxSpace.getItems();
         String newFreeSpace = "";
+        String name = username.getText();
         String space = comboBoxSpace.getValue();
 
         for (int i=0; i<list.size();i++)
@@ -48,9 +50,7 @@ public class BuyTicketsController {
             }
         }
 
-        Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-        Statement st = com.createStatement();
-        ResultSet rs = st.executeQuery("SELECT BusySpace FROM Travels where id = " + travelID);
+        ResultSet rs = DatabaseClass.saveTicket(travelID);
         String strbusySpace = "";
 
         if (rs.next())
@@ -60,11 +60,12 @@ public class BuyTicketsController {
 
         comboBoxDest.setItems(list);
 
-        PreparedStatement st2 = com.prepareStatement("UPDATE Travels set FREESPACE = ?, BusySpace = ? where ID = ?");
+        PreparedStatement st2 = DatabaseClass.saveTicketUpdateData();
         st2.setString(1, newFreeSpace);
         st2.setString(2, strbusySpace + "," + space);
         st2.setInt(3, travelID);
         st2.executeQuery();
+        DatabaseClass.infoBox("Hello, " + name+ "\n You Successfully Bought a Ticket", "Buy Ticket");
 
     }
 
@@ -72,9 +73,7 @@ public class BuyTicketsController {
     void destinationsLoad(MouseEvent event) throws SQLException {
 
         ObservableList<String> list = FXCollections.observableArrayList();
-        Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-        Statement st = com.createStatement();
-        ResultSet rs = st.executeQuery("SELECT Description FROM Destinations");
+        ResultSet rs = DatabaseClass.destinationStatementLoad();
         while (rs.next())
         {
             list.add(rs.getString("Description"));
@@ -86,9 +85,8 @@ public class BuyTicketsController {
     void spaceLoad(MouseEvent event) throws SQLException {
         String dest = comboBoxDest.getValue();
         ObservableList<String> list = FXCollections.observableArrayList();
-        Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-        Statement st = com.createStatement();
-        ResultSet rs = st.executeQuery("SELECT a.Id, Price, FreeSpace FROM Travels a join destinations b on b.id = a.destination where b.description = '" +dest+"'");
+
+        ResultSet rs = DatabaseClass.spaceLoadStatement(dest);
         String freespace = "";
         String strprice = "";
 

@@ -1,13 +1,16 @@
 package Controllers;
 
+import DataClasses.DatabaseClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-import javax.swing.*;
 import java.sql.*;
 
 public class CreateCashierController {
@@ -39,9 +42,7 @@ public class CreateCashierController {
         if(cashierCity.getText().equals("Varna")) {
             comboBoxCashier.setValue("Choose Office");
             ObservableList<String> list = FXCollections.observableArrayList();
-            Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-            Statement st = com.createStatement();
-            ResultSet rs = st.executeQuery("SELECT Kvartal FROM OFFICEVARNA");
+            ResultSet rs = DatabaseClass.CashierOfficeVarnaStatement();
             while (rs.next())
             {
                 list.add(rs.getString("Kvartal"));
@@ -52,9 +53,8 @@ public class CreateCashierController {
         {
             comboBoxCashier.setValue("Choose Office");
             ObservableList<String> list = FXCollections.observableArrayList();
-            Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-            Statement st = com.createStatement();
-            ResultSet rs = st.executeQuery("SELECT Kvartal FROM OFFICEDOBRICH");
+            ResultSet rs = DatabaseClass.CashierOfficeDobrichStatement();
+
             while (rs.next())
             {
                 list.add(rs.getString("Kvartal"));
@@ -65,9 +65,8 @@ public class CreateCashierController {
         {
             comboBoxCashier.setValue("Choose Office");
             ObservableList<String> list = FXCollections.observableArrayList();
-            Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-            Statement st = com.createStatement();
-            ResultSet rs = st.executeQuery("SELECT Kvartal FROM OFFICESOFIA");
+            ResultSet rs = DatabaseClass.CashierOfficeSofiaStatement();
+
             while (rs.next())
             {
                 list.add(rs.getString("Kvartal"));
@@ -77,8 +76,6 @@ public class CreateCashierController {
         else {
             label.setText("Please Insert Available City (Varna, Sofia, Dobrich)");
         }
-
-
     }
 
 
@@ -87,14 +84,12 @@ public class CreateCashierController {
 
         String city = cashierCity.getText();
         String name = cashierName.getText();
-
-        Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-        PreparedStatement st = com.prepareStatement("Insert into Cashier (name,city,office) values(?,?,?)");
+        PreparedStatement st = DatabaseClass.CashierCreateStatement();
         st.setString(1, name);
         st.setString(2, city);
         st.setString(3, comboBoxCashier.getValue());
         st.executeQuery();
-        JOptionPane.showMessageDialog(null,"Cashier Successfully Created");
+        DatabaseClass.infoBox("Cashier Successfully Created", "Created Cashier");
     }
 
 
@@ -102,17 +97,13 @@ public class CreateCashierController {
     @FXML
     void tableClickFillData(MouseEvent event) throws SQLException {
 
-        Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-        PreparedStatement st = com.prepareStatement("SELECT * FROM CASHIER");
-        ResultSetMetaData rsmd = st.getMetaData();
+        ResultSetMetaData rsmd = DatabaseClass.TableFillNamesDataStatement();
         String name1 = rsmd.getColumnName(1);
         String name2 = rsmd.getColumnName(2);
         String name3 = rsmd.getColumnName(3);
         c1.setText(name1);
         c2.setText(name2);
         c3.setText(name3);
-        st.executeQuery();
-
     }
 
 }

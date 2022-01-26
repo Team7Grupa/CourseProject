@@ -1,5 +1,6 @@
 package Controllers;
 
+import DataClasses.DatabaseClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,8 +9,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-import javax.swing.*;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class CreateCompanyController {
 
@@ -25,14 +26,13 @@ public class CreateCompanyController {
         String name = companyName.getText();
         String city = companyCity.getText();
 
-        Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");
-
-        PreparedStatement st = com.prepareStatement("Insert into COMPANY(name,city,transport) values(?,?,?)");
+        PreparedStatement st = DatabaseClass.CompanyStatement();
         st.setString(1, name);
         st.setString(2, city);
         st.setString(3, comboBoxTransport.getValue());
         st.executeQuery();
-        JOptionPane.showMessageDialog(null,"Company Successfully Created");
+
+        DatabaseClass.infoBox("Company Successfully Created", "Created Company");
     }
 
 
