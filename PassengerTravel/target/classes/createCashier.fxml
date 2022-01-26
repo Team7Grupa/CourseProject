@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CreateCashierController">
    <children>
@@ -22,17 +23,22 @@
             <Image url="@images__1_-removebg-preview.png" />
          </image>
       </ImageView>
-      <TableView layoutX="70.0" layoutY="80.0" prefHeight="210.0" prefWidth="458.0">
-         <columns>
-            <TableColumn prefWidth="75.0" />
-            <TableColumn prefWidth="75.0" />
-         </columns>
-      </TableView>
-      <Label layoutX="188.0" text="Create Cashier">
+      <Button layoutX="263.0" layoutY="332.0" mnemonicParsing="false" onAction="#cashierCreate" text="Create Cashier" />
+      <Label layoutX="169.0" text="Create Cashier">
          <font>
             <Font size="38.0" />
          </font>
       </Label>
-      <Button layoutX="229.0" layoutY="338.0" mnemonicParsing="false" text="Create Cashier" />
+      <TextField fx:id="cashierName" layoutX="19.0" layoutY="117.0" promptText="Name" />
+      <TextField fx:id="cashierCity" layoutX="19.0" layoutY="167.0" promptText="City" />
+      <ComboBox fx:id="comboBoxCashier" layoutX="19.0" layoutY="216.0" onMouseClicked="#cashierOffice" prefWidth="150.0" promptText="Office" />
+      <Label fx:id="label" layoutX="169.0" layoutY="243.0" prefHeight="47.0" prefWidth="418.0" textFill="RED" />
+      <TableView fx:id="tableIDCashier" layoutX="255.0" layoutY="102.0" onMouseClicked="#tableClickFillData" prefHeight="130.0" prefWidth="228.0">
+        <columns>
+          <TableColumn fx:id="c1" prefWidth="75.0" text="C1" />
+          <TableColumn fx:id="c2" prefWidth="75.0" text="C2" />
+            <TableColumn fx:id="c3" prefWidth="75.0" text="C3" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

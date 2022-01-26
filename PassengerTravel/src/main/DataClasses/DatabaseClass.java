@@ -5,7 +5,8 @@ import javafx.scene.control.Label;
 import javax.swing.*;
 import java.sql.*;
 
-public class DatabaseClass {
+public class DatabaseClass
+{
     public static Connection getConnection() throws SQLException
     {
         Connection com = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ASD","1234");

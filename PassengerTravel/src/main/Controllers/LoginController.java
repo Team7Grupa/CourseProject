@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -18,15 +17,6 @@ public class LoginController {
 
     @FXML
     private Pane pane;
-
-    @FXML
-    private Button login;
-
-    @FXML
-    private Button reset;
-
-    @FXML
-    private Button exit;
 
     @FXML
     private PasswordField password;

@@ -32,6 +32,7 @@ public class LoginStart extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         }
+
         else
         {
             log.error("Sorry the main fxml was not found");
